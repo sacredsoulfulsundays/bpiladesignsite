@@ -1,0 +1,1 @@
+import{t as e}from"./videos-BqHL0zHW.js";function t(t){return e.videos.find(e=>e.id===t)}export{t};
