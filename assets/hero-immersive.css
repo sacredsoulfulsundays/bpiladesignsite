@@ -117,32 +117,110 @@
     opacity: 0;
   }
 
-  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-toggle {
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control {
     z-index: 4;
     position: absolute;
     top: clamp(.75rem, 1.3vw, 1.1rem);
     right: clamp(.75rem, 1.3vw, 1.1rem);
-    border: 1px solid rgba(255, 255, 255, .55);
+    width: 3.25rem;
+    min-height: 3.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .65rem;
+    padding: .45rem;
     border-radius: 999px;
     background: rgba(18, 17, 15, .62);
-    color: #fff;
-    padding: .58rem .9rem;
-    font: inherit;
-    font-size: .72rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    line-height: 1;
+    border: 1px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(.55rem);
     box-shadow: 0 .75rem 1.75rem rgba(0, 0, 0, .28);
     opacity: 0;
     transform: translate3d(0, -.35rem, 0);
     pointer-events: none;
-    cursor: pointer;
+    transition: opacity .28s ease, transform .28s ease, background .2s ease;
   }
 
-  .bp-home-hero--immersive.bp-home-hero--video-ready .bp-home-hero__video .bp-video__sound-toggle {
+  .bp-home-hero--immersive.bp-home-hero--video-ready .bp-home-hero__video .bp-video__sound-control {
     opacity: 1;
     transform: translate3d(0, 0, 0);
     pointer-events: auto;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-toggle {
+    width: 2.35rem;
+    height: 2.35rem;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+    position: relative;
+    display: block;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-icon:before {
+    content: "";
+    position: absolute;
+    left: .05rem;
+    top: .34rem;
+    width: .38rem;
+    height: .38rem;
+    border-radius: .08rem;
+    background: currentColor;
+    box-shadow: .31rem -.24rem 0 .06rem currentColor, .31rem .24rem 0 .06rem currentColor;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-icon:after {
+    content: "";
+    position: absolute;
+    right: .02rem;
+    top: .18rem;
+    width: .55rem;
+    height: .7rem;
+    border: 2px solid currentColor;
+    border-left: 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 0 999px 999px 0;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control:not(.bp-video__sound-control--on) .bp-video__sound-icon:after {
+    transform: scaleX(.45);
+    opacity: .6;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__volume-slider {
+    position: absolute;
+    top: 5.25rem;
+    right: -1.75rem;
+    width: 6.75rem;
+    height: 1.5rem;
+    accent-color: #fff;
+    opacity: 0;
+    transform: rotate(-90deg) translate3d(-.25rem, 0, 0);
+    transform-origin: center;
+    pointer-events: none;
+    cursor: pointer;
+    transition: opacity .24s ease, transform .24s ease;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control:hover .bp-video__volume-slider,
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control:focus-within .bp-video__volume-slider {
+    opacity: 1;
+    transform: rotate(-90deg) translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control:hover,
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control:focus-within {
+    background: rgba(18, 17, 15, .78);
   }
 
   .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-toggle:hover,
@@ -163,7 +241,8 @@
   .bp-home-hero--immersive .bp-home-hero__video-wrap,
   .bp-home-hero--immersive .bp-home-hero__video .bp-video__embed--underlay,
   .bp-home-hero--immersive .bp-home-hero__video .bp-video__play-trigger,
-  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-toggle {
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__sound-control,
+  .bp-home-hero--immersive .bp-home-hero__video .bp-video__volume-slider {
     transition: none;
   }
 }
