@@ -889,6 +889,14 @@
       const i = +b.dataset.i;
       goTo(i, i > index ? 1 : -1);
     });
+    document.getElementById("prev-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      prev();
+    });
+    document.getElementById("next-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      next();
+    });
 
     const start = parseHash();
     showInstant(start);
@@ -897,7 +905,7 @@
 
     let ignoreClick = false;
     document.getElementById("stage").addEventListener("click", (e) => {
-      if (e.target.closest("#hud .rail")) return;
+      if (e.target.closest("#hud .pager")) return;
       if (ignoreClick) {
         ignoreClick = false;
         return;
