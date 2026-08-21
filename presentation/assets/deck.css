@@ -497,21 +497,27 @@ button { font-family: inherit; }
 .q4 { left: 50.25%; top: 43.6%; right: 0; height: 43.6%; }
 
 /* ---- leadership ---- */
-.lead-shot { top: 0; height: 62%; }
+.lead-shot { top: 0; height: 72%; }
 .lead-shot.left { left: 0; width: 50%; }
 .lead-shot.right { left: 50%; width: 50%; }
+.lead-shot.left img {
+  filter: grayscale(1);
+  object-position: 50% 18%;
+}
+.lead-shot.right img { object-position: 50% 8%; }
 .lead-copy {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: 38%;
+  height: 28%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 36px 64px 48px;
+  align-content: start;
+  padding: 22px 64px 28px;
   gap: 48px;
 }
-.lead-copy .display { font-size: 32px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; }
-.lead-copy .role { margin-top: 10px; font-size: 14px; }
-.lead-copy .bio { margin-top: 18px; font-size: 16px; color: #d8d8d8; max-width: 760px; }
+.lead-copy .display { font-size: 32px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px; }
+.lead-copy .role { margin-top: 8px; font-size: 14px; }
+.lead-copy .bio { margin-top: 12px; font-size: 16px; color: #d8d8d8; max-width: 760px; }
 .lead-kicker { position: absolute; left: 64px; top: 28px; z-index: 4; }
 
 /* ---- awards ---- */
@@ -816,13 +822,13 @@ button { font-family: inherit; }
 .q3 { left: 0; top: 36%; width: 50%; height: 36%; }
 .q4 { left: 50%; top: 36%; right: 0; height: 36%; }
 
-.lead-shot { height: 30%; }
+.lead-shot { height: 46%; }
 .lead-kicker { left: 16px; top: max(12px, env(safe-area-inset-top)); }
 .lead-copy {
-  height: 40%;
+  height: 32%;
   grid-template-columns: 1fr;
   gap: 16px;
-  padding: 14px 16px max(72px, calc(env(safe-area-inset-bottom) + 56px));
+  padding: 10px 16px max(72px, calc(env(safe-area-inset-bottom) + 56px));
   overflow: auto;
 }
 .lead-copy .display { font-size: 18px; margin-top: 8px; }
