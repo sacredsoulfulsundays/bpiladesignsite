@@ -216,7 +216,16 @@ button { font-family: inherit; }
   z-index: 2;
 }
 
-.hero-rail .kicker { margin-top: 72px; }
+.brand-logo {
+  width: min(100%, 300px);
+  margin-top: 4px;
+}
+.brand-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hero-rail .kicker { margin-top: 56px; }
 .hero-rail .display {
   margin-top: 28px;
   font-size: 62px;
@@ -502,9 +511,11 @@ button { font-family: inherit; }
 .lead-shot.right { left: 50%; width: 50%; }
 .lead-shot.left img {
   filter: grayscale(1);
-  object-position: 50% 18%;
+  object-position: 48% 20%;
+  transform: scale(1.28);
+  transform-origin: 48% 22%;
 }
-.lead-shot.right img { object-position: 50% 8%; }
+.lead-shot.right img { object-position: 50% 12%; }
 .lead-copy {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -677,6 +688,7 @@ button { font-family: inherit; }
   height: 58%;
   padding: 20px 20px max(80px, calc(env(safe-area-inset-bottom) + 64px));
 }
+.brand-logo { width: min(72%, 240px); }
 .hero-rail .kicker { margin-top: 16px; }
 .hero-rail .display {
   font-size: clamp(28px, 8vw, 40px);

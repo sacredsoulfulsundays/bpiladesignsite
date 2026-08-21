@@ -13,6 +13,7 @@
       transition: 1,
       photo: "hero-lobby.jpg",
       brand: "B Pila Design Studio",
+      logo: "bpila-signature.svg",
       kicker: "Commercial + Institutional Interiors",
       title: ["Spaces with", "soul.", "Places with", "purpose."],
       sub: "For housing, care, wellness, and community.",
@@ -303,7 +304,7 @@
       case "hero":
         return `<section class="slide" data-id="${s.id}">
           <div class="hero-rail">
-            <div class="brand reveal">${esc(s.brand)}</div>
+            <div class="brand-logo reveal"><img src="${src(s.logo)}" alt="${esc(s.brand)}"></div>
             <div class="kicker reveal">${esc(s.kicker)}</div>
             <div class="display">${s.title.map((t) => `<span class="clip"><span class="reveal">${esc(t)}</span></span>`).join("")}</div>
             <div class="body reveal">${esc(s.sub)}</div>
