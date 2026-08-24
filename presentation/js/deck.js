@@ -278,7 +278,24 @@
         { name: "Minneola Hills", a: "NAIOP Best Multifamily Development  ·  AAGO Project of the Year  ·  ORA Elite 1%" },
         { name: "University Station", a: "SFBJ Best Speculative Project  ·  Best Affordable Residential" },
       ],
-      lead: "Miami Dade College Hall of Fame  ·  Luxe Gold List  ·  TCI Top 50 Women-Owned Businesses in Florida  ·  HGTV Designer’s Challenge — Miami",
+      career: [
+        { name: "ASID Designer of the Year", a: "Halo / Metalux Competition" },
+        { name: "IDG Designer of the Year", a: "1995, 1997" },
+        { name: "ASID Design Excellence", a: "1997, 1999  ·  Furniture 1996" },
+        { name: "Absolut Vodka Interior Designer of the Year", a: "1996" },
+        { name: "Andrew Martin International Interior Design Award", a: "1998, 2003" },
+        { name: "International Design Awards", a: "2014" },
+        { name: "Latin Builders Association Best Company of the Year", a: "2001" },
+        { name: "Southern Accents National Interior Design Contest", a: "2002, 2004" },
+        { name: "Home Book Design Excellence Awards", a: "2002" },
+        { name: "Florida’s Best Awards", a: "2006" },
+        { name: "Midnight Affair Design Excellence Awards", a: "2003" },
+        { name: "Dream House Interior Design Showcase", a: "2003" },
+        { name: "Florida Style Competition Grand Prize", a: "1995 Hors Concours  ·  1996 Bedroom" },
+        { name: "ASFD Pinnacle Awards Finalist", a: "2014  ·  Casual Dining" },
+        { name: "Interior Design BOY Awards Finalist", a: "2016  ·  Recreational Tables" },
+      ],
+      lead: "Miami Dade College Hall of Fame  ·  Luxe Gold List  ·  TCI Top 50 Women-Owned Businesses in Florida  ·  HGTV Designer’s Challenge — Miami  ·  HGTV Interiors by Design  ·  DIY Network",
     },
   ];
 
@@ -460,7 +477,7 @@
                 <div class="display reveal">${esc(s.title)}</div>
               </div>
             </div>
-            <div class="kicker reveal" style="margin-top:48px">Project Honors</div>
+            <div class="kicker awards-sec reveal">Project Honors</div>
             <div class="honors">
               ${s.honors
                 .map(
@@ -469,8 +486,17 @@
                 .join("")}
             </div>
             <div class="awards-rule-h"></div>
+            <div class="kicker awards-sec reveal">Career Honors</div>
+            <div class="career-grid">
+              ${s.career
+                .map(
+                  (h) => `<div class="reveal"><div class="career-name">${esc(h.name)}</div><div class="career-meta">${esc(h.a)}</div></div>`
+                )
+                .join("")}
+            </div>
+            <div class="awards-rule-h"></div>
             <div class="lead-acc">
-              <div class="kicker reveal">Leadership Accolades</div>
+              <div class="kicker reveal">Leadership + Media</div>
               <div class="list reveal">${esc(s.lead)}</div>
             </div>
           </div>

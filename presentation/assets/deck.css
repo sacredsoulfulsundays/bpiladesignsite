@@ -553,36 +553,50 @@ button { font-family: inherit; }
 
 /* ---- awards ---- */
 .awards {
-  padding: 72px 96px 64px;
+  padding: 40px 80px 72px;
 }
 .awards-head { display: flex; gap: 22px; align-items: flex-start; }
 .awards-rule {
   width: 6px;
-  height: 92px;
+  height: 72px;
   background: var(--bp-accent);
   flex: 0 0 auto;
 }
-.awards .display { font-size: 46px; margin-top: 10px; }
+.awards .display { font-size: 38px; margin-top: 8px; }
+.awards-sec { margin-top: 22px; }
 .honors {
-  margin-top: 56px;
+  margin-top: 14px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px 96px;
+  gap: 12px 72px;
 }
 .honor-name {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.honor-awards { margin-top: 6px; font-size: 16px; color: #cfcfcf; }
+.honor-awards { margin-top: 4px; font-size: 14px; color: #cfcfcf; }
+.career-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px 36px;
+}
+.career-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.career-meta { margin-top: 3px; font-size: 12px; color: #b8b8b8; }
 .awards-rule-h {
-  margin-top: 56px;
+  margin-top: 22px;
   height: 1px;
   background: rgba(255,255,255,0.22);
 }
-.lead-acc { margin-top: 36px; }
-.lead-acc .list { margin-top: 14px; font-size: 17px; color: #ddd; }
+.lead-acc { margin-top: 18px; }
+.lead-acc .list { margin-top: 10px; font-size: 15px; color: #ddd; line-height: 1.45; max-width: 1500px; }
 
 /* ---- HUD ---- */
 #hud {
@@ -931,6 +945,8 @@ button { font-family: inherit; }
 }
 .honor-name { font-size: 14px; }
 .honor-awards { font-size: 13px; }
+.career-grid { grid-template-columns: 1fr; gap: 12px; }
+.career-name { font-size: 13px; }
 .awards-rule-h { margin-top: 24px; }
 .lead-acc .list { font-size: 13px; }
 .photo.zoomable { touch-action: none; }
