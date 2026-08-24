@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>B Pila Design Studio — Commercial + Institutional Credentials</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/deck.css">
 </head>
@@ -29,6 +28,18 @@
         </button>
       </div>
       <div id="hint">Click or →  ·  F fullscreen  ·  P autoplay</div>
+    </div>
+    <div id="lightbox" aria-hidden="true">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <button type="button" class="lightbox-nav" id="lightbox-prev" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+      </button>
+      <img id="lightbox-img" alt="">
+      <button type="button" class="lightbox-nav" id="lightbox-next" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+      </button>
     </div>
   </div>
   <script src="vendor/anime.min.js"></script>

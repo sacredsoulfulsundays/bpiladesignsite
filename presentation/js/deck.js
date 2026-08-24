@@ -598,14 +598,6 @@
   function parkSlide(el) {
     el.classList.remove("is-active", "is-leaving", "is-entering");
     clearSlideStyle(el);
-    el.querySelectorAll(".photo.zoomable").forEach(resetPanPhoto);
-    if (pan.photo && el.contains(pan.photo)) {
-      pan.photo = null;
-      pan.img = null;
-      pan.target = 1;
-      pan.scale = 1;
-      pan.mx = pan.my = pan.x = pan.y = 0.5;
-    }
   }
 
   function parkOthers(keep) {
@@ -747,6 +739,7 @@
   }
 
   async function goTo(i, dir) {
+    if (lb.open) closeLightbox();
     if (busy) return;
     i = (i + SLIDES.length) % SLIDES.length;
     if (i === index) return;
@@ -805,130 +798,87 @@
     });
   }
 
-  const ZOOM = 1.24;
-  const pan = {
-    photo: null,
-    img: null,
-    mx: 0.5,
-    my: 0.5,
-    x: 0.5,
-    y: 0.5,
-    scale: 1,
-    target: 1,
-    raf: 0,
-  };
+  const lb = { open: false, files: [], i: 0 };
 
-  function applyPan() {
-    if (!pan.img) return;
-    const panX = (0.5 - pan.x) * (pan.scale - 1) * 100;
-    const panY = (0.5 - pan.y) * (pan.scale - 1) * 100;
-    pan.img.style.transform =
-      "translate3d(" + panX.toFixed(3) + "%, " + panY.toFixed(3) + "%, 0) scale(" + pan.scale.toFixed(4) + ")";
+  function lbEls() {
+    return {
+      root: document.getElementById("lightbox"),
+      img: document.getElementById("lightbox-img"),
+      prev: document.getElementById("lightbox-prev"),
+      next: document.getElementById("lightbox-next"),
+    };
   }
 
-  function resetPanPhoto(photo) {
-    if (!photo) return;
-    photo.classList.remove("is-zoom");
-    const img = photo.querySelector("img");
-    if (img) img.style.transform = "translate3d(0,0,0) scale(1)";
+  function lbShow(i) {
+    if (!lb.files.length) return;
+    lb.i = (i + lb.files.length) % lb.files.length;
+    const { img } = lbEls();
+    img.src = lb.files[lb.i];
   }
 
-  function tickPan() {
-    pan.raf = 0;
-    pan.x += (pan.mx - pan.x) * 0.16;
-    pan.y += (pan.my - pan.y) * 0.16;
-    pan.scale += (pan.target - pan.scale) * 0.14;
-    applyPan();
-    const tracking =
-      Math.abs(pan.mx - pan.x) > 0.001 ||
-      Math.abs(pan.my - pan.y) > 0.001 ||
-      Math.abs(pan.target - pan.scale) > 0.002;
-    if (tracking) {
-      pan.raf = requestAnimationFrame(tickPan);
-    } else if (pan.target === 1 && pan.photo) {
-      resetPanPhoto(pan.photo);
-      pan.photo = null;
-      pan.img = null;
+  function openLightbox(photo) {
+    const slide = photo.closest(".slide.is-active");
+    if (!slide) return;
+    const tiles = Array.from(slide.querySelectorAll(".photo.zoomable img"));
+    lb.files = tiles.map((im) => im.getAttribute("src")).filter(Boolean);
+    const clicked = photo.querySelector("img");
+    const start = Math.max(0, tiles.indexOf(clicked));
+    const { root } = lbEls();
+    root.classList.toggle("solo", lb.files.length < 2);
+    root.classList.add("is-on");
+    root.setAttribute("aria-hidden", "false");
+    lb.open = true;
+    lbShow(start);
+    if (autoplay) {
+      clearTimeout(autoTimer);
     }
   }
 
-  function armPan() {
-    if (!pan.raf) pan.raf = requestAnimationFrame(tickPan);
+  function closeLightbox() {
+    if (!lb.open) return;
+    const { root } = lbEls();
+    root.classList.remove("is-on");
+    root.setAttribute("aria-hidden", "true");
+    lb.open = false;
+    armAuto();
   }
 
-  function bindGalleryPan() {
-    if (reduced) return;
-    const root = document.getElementById("slides");
-
-    root.addEventListener("mousemove", (e) => {
-      const photo = e.target.closest(".photo.zoomable");
-      if (!photo || !photo.closest(".slide.is-active")) {
-        if (pan.photo) {
-          pan.target = 1;
-          pan.mx = 0.5;
-          pan.my = 0.5;
-          armPan();
-        }
-        return;
-      }
-      if (pan.photo && pan.photo !== photo) resetPanPhoto(pan.photo);
-      pan.photo = photo;
-      pan.img = photo.querySelector("img");
-      photo.classList.add("is-zoom");
-      pan.target = ZOOM;
-      const r = photo.getBoundingClientRect();
-      pan.mx = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-      pan.my = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
-      armPan();
+  function bindLightbox() {
+    const { root, prev, next } = lbEls();
+    document.getElementById("lightbox-close").addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeLightbox();
     });
-
-    root.addEventListener("mouseleave", () => {
-      pan.target = 1;
-      pan.mx = 0.5;
-      pan.my = 0.5;
-      armPan();
+    prev.addEventListener("click", (e) => {
+      e.stopPropagation();
+      lbShow(lb.i - 1);
     });
-
+    next.addEventListener("click", (e) => {
+      e.stopPropagation();
+      lbShow(lb.i + 1);
+    });
+    root.addEventListener("click", (e) => {
+      if (e.target.closest("button") || e.target.id === "lightbox-img") return;
+      closeLightbox();
+    });
+    let lx = null;
     root.addEventListener(
       "touchstart",
       (e) => {
-        const photo = e.target.closest(".photo.zoomable");
-        if (!photo || !photo.closest(".slide.is-active") || reduced) return;
-        if (pan.photo && pan.photo !== photo) resetPanPhoto(pan.photo);
-        pan.photo = photo;
-        pan.img = photo.querySelector("img");
-        photo.classList.add("is-zoom");
-        pan.target = ZOOM;
-        const t = e.touches[0];
-        const r = photo.getBoundingClientRect();
-        pan.mx = Math.min(1, Math.max(0, (t.clientX - r.left) / r.width));
-        pan.my = Math.min(1, Math.max(0, (t.clientY - r.top) / r.height));
-        armPan();
+        lx = e.changedTouches[0].clientX;
       },
       { passive: true }
     );
-
     root.addEventListener(
-      "touchmove",
+      "touchend",
       (e) => {
-        if (!pan.photo || pan.target === 1) return;
-        const t = e.touches[0];
-        const r = pan.photo.getBoundingClientRect();
-        pan.mx = Math.min(1, Math.max(0, (t.clientX - r.left) / r.width));
-        pan.my = Math.min(1, Math.max(0, (t.clientY - r.top) / r.height));
-        armPan();
-        e.preventDefault();
+        if (lx == null) return;
+        const dx = e.changedTouches[0].clientX - lx;
+        lx = null;
+        if (Math.abs(dx) > 40) lbShow(lb.i + (dx < 0 ? 1 : -1));
       },
-      { passive: false }
+      { passive: true }
     );
-
-    root.addEventListener("touchend", () => {
-      if (!pan.photo) return;
-      pan.target = 1;
-      pan.mx = 0.5;
-      pan.my = 0.5;
-      armPan();
-    });
   }
 
   function init() {
@@ -969,11 +919,28 @@
         ignoreClick = false;
         return;
       }
-      if (isMobileLayout() && e.target.closest(".photo.zoomable")) return;
+      const photo = e.target.closest(".photo.zoomable");
+      if (photo && photo.closest(".slide.is-active")) {
+        openLightbox(photo);
+        return;
+      }
       next();
     });
 
     window.addEventListener("keydown", (e) => {
+      if (lb.open) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeLightbox();
+        } else if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          lbShow(lb.i + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          lbShow(lb.i - 1);
+        }
+        return;
+      }
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
         e.preventDefault();
         next();
@@ -1001,23 +968,20 @@
     });
 
     let touchX = null;
-    let panningGallery = false;
     document.getElementById("stage").addEventListener(
       "touchstart",
       (e) => {
-        panningGallery = !!(e.target.closest(".photo.zoomable") && e.target.closest(".slide.is-active"));
-        touchX = panningGallery ? null : e.changedTouches[0].clientX;
+        if (e.target.closest(".photo.zoomable")) {
+          touchX = null;
+          return;
+        }
+        touchX = e.changedTouches[0].clientX;
       },
       { passive: true }
     );
     document.getElementById("stage").addEventListener(
       "touchend",
       (e) => {
-        if (panningGallery) {
-          panningGallery = false;
-          ignoreClick = true;
-          return;
-        }
         if (touchX == null) return;
         const dx = e.changedTouches[0].clientX - touchX;
         touchX = null;
@@ -1035,7 +999,7 @@
     });
 
     bindCursor();
-    bindGalleryPan();
+    bindLightbox();
     setTimeout(() => document.getElementById("hint").classList.add("is-gone"), 4200);
   }
 
