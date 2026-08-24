@@ -212,9 +212,9 @@
     {
       id: "culmer-g",
       n: "15",
-      layout: "gallery-quad",
+      layout: "gallery-tri",
       transition: 1,
-      photos: ["culmer-g1.jpg", "culmer-g2.jpg", "culmer-g3.jpg", "culmer-g4.jpg"],
+      photos: ["culmer-g1.jpg", "culmer-g2.jpg", "culmer-g3.jpg"],
       name: "Culmer Place",
       cap: "Warm neutrals, sculptural lighting, and flexible gathering zones give the clubhouse a confident sense of welcome.",
     },
@@ -434,6 +434,18 @@
           ${photoEl(s.photos[0], "g-span", true)}
           ${photoEl(s.photos[1], "q3", true)}
           ${photoEl(s.photos[2], "q4", true)}
+          <div class="gal-bar">
+            <div class="accent-bar"></div>
+            <div class="name reveal">${esc(s.name)}</div>
+            <div class="cap reveal">${esc(s.cap)}</div>
+          </div>
+          ${foot(s.n)}
+        </section>`;
+      case "gallery-tri":
+        return `<section class="slide" data-id="${s.id}">
+          ${photoEl(s.photos[0], "v1", true)}
+          ${photoEl(s.photos[1], "v2", true)}
+          ${photoEl(s.photos[2], "v3", true)}
           <div class="gal-bar">
             <div class="accent-bar"></div>
             <div class="name reveal">${esc(s.name)}</div>
