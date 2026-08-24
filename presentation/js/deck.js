@@ -185,9 +185,9 @@
     {
       id: "minneola-g",
       n: "13",
-      layout: "gallery-quad",
+      layout: "gallery-span",
       transition: 1,
-      photos: ["minneola-g1.jpg", "minneola-g2.jpg", "minneola-g3.jpg", "minneola-g4.jpg"],
+      photos: ["minneola-g1.jpg", "minneola-g3.jpg", "minneola-g4.jpg"],
       name: "Minneola Hills",
       cap: "Architectural arches, crafted details, and distinctive rooms turn a large clubhouse into a memorable sequence.",
     },
@@ -399,6 +399,18 @@
           ${photoEl(s.photos[0], "g-main", true)}
           ${photoEl(s.photos[1], "g-top", true)}
           ${photoEl(s.photos[2], "g-bot", true)}
+          <div class="gal-bar">
+            <div class="accent-bar"></div>
+            <div class="name reveal">${esc(s.name)}</div>
+            <div class="cap reveal">${esc(s.cap)}</div>
+          </div>
+          ${foot(s.n)}
+        </section>`;
+      case "gallery-span":
+        return `<section class="slide" data-id="${s.id}">
+          ${photoEl(s.photos[0], "g-span", true)}
+          ${photoEl(s.photos[1], "q3", true)}
+          ${photoEl(s.photos[2], "q4", true)}
           <div class="gal-bar">
             <div class="accent-bar"></div>
             <div class="name reveal">${esc(s.name)}</div>
