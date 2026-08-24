@@ -431,9 +431,9 @@
         </section>`;
       case "gallery-span":
         return `<section class="slide" data-id="${s.id}">
-          ${photoEl(s.photos[0], "g-span", true)}
-          ${photoEl(s.photos[1], "q3", true)}
-          ${photoEl(s.photos[2], "q4", true)}
+          ${photoEl(s.photos[0], "g-left", true)}
+          ${photoEl(s.photos[1], "g-rt", true)}
+          ${photoEl(s.photos[2], "g-rb", true)}
           <div class="gal-bar">
             <div class="accent-bar"></div>
             <div class="name reveal">${esc(s.name)}</div>
