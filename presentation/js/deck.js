@@ -269,7 +269,7 @@
       n: "19",
       layout: "awards",
       transition: 2,
-      kicker: "Awards + Accolades",
+      kicker: "Awards + Accolades + Media",
       title: "Recognition rooted in work that serves.",
       honors: [
         { name: "Hudson Village", a: "NAIOP Project of the Year  ·  MHN Gold" },
@@ -476,16 +476,15 @@
       case "awards":
         return `<section class="slide" data-id="${s.id}">
           <div class="awards">
-            <div class="kicker reveal">Media</div>
-            <div class="media-row">
-              ${s.media.map((m) => `<div class="media-item reveal">${esc(m)}</div>`).join("")}
-            </div>
             <div class="awards-head">
               <div class="awards-rule"></div>
               <div>
                 <div class="kicker reveal">${esc(s.kicker)}</div>
                 <div class="display reveal">${esc(s.title)}</div>
               </div>
+            </div>
+            <div class="media-row">
+              ${s.media.map((m) => `<div class="media-item reveal">${esc(m)}</div>`).join("")}
             </div>
             <div class="kicker awards-sec reveal">Project Honors</div>
             <div class="honors">

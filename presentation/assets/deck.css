@@ -553,28 +553,28 @@ button { font-family: inherit; }
 
 /* ---- awards ---- */
 .awards {
-  padding: 32px 72px 68px;
-}
-.media-row {
-  display: grid;
-  grid-template-columns: 1.35fr 1.35fr 0.95fr 0.55fr;
-  gap: 8px 28px;
-  margin-top: 10px;
-  margin-bottom: 8px;
-  align-items: end;
-}
-.media-item {
-  color: var(--bp-accent);
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
+  padding: 36px 80px 68px;
 }
 .awards-head {
   display: flex;
   gap: 22px;
   align-items: flex-start;
+  margin-top: 0;
+}
+.media-row {
+  display: grid;
+  grid-template-columns: 1.25fr 1.2fr 0.85fr 0.45fr;
+  gap: 10px 32px;
   margin-top: 22px;
+  margin-bottom: 6px;
+  align-items: baseline;
+}
+.media-item {
+  color: var(--bp-accent);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 .awards-rule {
   width: 6px;
@@ -962,7 +962,7 @@ button { font-family: inherit; }
   grid-template-columns: 1fr 1fr;
   gap: 10px 16px;
 }
-.media-item { font-size: 20px; }
+.media-item { font-size: 22px; font-weight: 800; }
 .honors {
   grid-template-columns: 1fr;
   gap: 16px;
