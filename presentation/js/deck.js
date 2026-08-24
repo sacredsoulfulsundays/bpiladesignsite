@@ -295,7 +295,13 @@
         { name: "ASFD Pinnacle Awards Finalist", a: "2014  ·  Casual Dining" },
         { name: "Interior Design BOY Awards Finalist", a: "2016  ·  Recreational Tables" },
       ],
-      lead: "Miami Dade College Hall of Fame  ·  Luxe Gold List  ·  TCI Top 50 Women-Owned Businesses in Florida  ·  HGTV Designer’s Challenge — Miami  ·  HGTV Interiors by Design  ·  DIY Network",
+      media: [
+        "HGTV Designer's Challenge",
+        "HGTV Interiors by Design",
+        "DIY Network",
+        "TEDx",
+      ],
+      lead: "Miami Dade College Hall of Fame  ·  Luxe Gold List  ·  TCI Top 50 Women-Owned Businesses in Florida",
     },
   ];
 
@@ -470,6 +476,10 @@
       case "awards":
         return `<section class="slide" data-id="${s.id}">
           <div class="awards">
+            <div class="kicker reveal">Media</div>
+            <div class="media-row">
+              ${s.media.map((m) => `<div class="media-item reveal">${esc(m)}</div>`).join("")}
+            </div>
             <div class="awards-head">
               <div class="awards-rule"></div>
               <div>
@@ -496,7 +506,7 @@
             </div>
             <div class="awards-rule-h"></div>
             <div class="lead-acc">
-              <div class="kicker reveal">Leadership + Media</div>
+              <div class="kicker reveal">Leadership</div>
               <div class="list reveal">${esc(s.lead)}</div>
             </div>
           </div>
