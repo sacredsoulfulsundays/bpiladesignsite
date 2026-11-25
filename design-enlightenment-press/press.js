@@ -1,3 +1,6 @@
+// This file only controls enhancements. The HTML contains the complete
+// pre-release page for readers without JavaScript. If permanent dates,
+// prices or publication facts change, update that fallback HTML too.
 (function () {
   'use strict';
 
@@ -115,25 +118,5 @@
     menuToggle.setAttribute('aria-expanded', 'false');
     each('#bp-mobile-menu details', function (group) { group.open = false; });
     menuToggle.focus();
-  });
-
-  var form = byId('notify-form');
-  var email = config ? config.NOTIFY_EMAIL : 'sales@bpiladesign.com';
-  form.action = 'mailto:' + email;
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    byId('notify-status').textContent = '';
-    // Silently ignore the honeypot. Do not open an email or claim success.
-    if (form.elements.website.value !== '') return;
-    if (!form.reportValidity()) return;
-    var body = [
-      'Please let me know when Sacred Living is out.',
-      '',
-      'First name: ' + form.elements.first_name.value.trim(),
-      'Email: ' + form.elements.email.value.trim(),
-      'I might come to the book signing: ' + (form.elements.signing_interest.checked ? 'yes' : 'no')
-    ].join('\n');
-    window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent('Tell me when Sacred Living is out') + '&body=' + encodeURIComponent(body);
-    byId('notify-status').textContent = 'Your email app should open with a note ready to send. Press send to finish.';
   });
 }());

@@ -12,7 +12,6 @@ window.PRESS_CONFIG = {
     show: true // Set false to hide the signing section and its hero link.
   },
   PODCAST_URL: null, // Add the episode URL to reveal the podcast card.
-  NOTIFY_EMAIL: 'sales@bpiladesign.com',
 
   // Prices are plain display strings, not calculated numbers.
   // Keep these IDs: they connect each setting to its static HTML card.
