@@ -41,6 +41,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bpiladesign.com/design-enlightenment-press/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bpiladesign.com/design-enlightenment-workshop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
